@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="mb-8 font-bold text-3xl">Contacts</h1>
+    <h1 class="mb-8 font-bold text-3xl">Contactos</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
         <label class="block text-gray-700">Trashed:</label>

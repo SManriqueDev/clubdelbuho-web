@@ -15,7 +15,7 @@
               </div>
             </dropdown>
           </div>
-          <div class="bg-white border-b w-full p-4 md:py-0 md:px-12 text-sm md:text-md flex justify-between items-center">
+          <div class="bg-white border-b w-full p-4 md:py-3 md:px-12 text-sm md:text-md flex justify-between items-center">
             <div class="mt-1 mr-4">{{ $page.auth.user.account.name }}</div>
             <dropdown class="mt-1" placement="bottom-end">
               <div class="flex items-center cursor-pointer select-none group">

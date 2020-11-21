@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="mb-8 font-bold text-3xl">Organizations</h1>
+    <h1 class="mb-8 font-bold text-3xl">Organizaciones</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
         <label class="block text-gray-700">Trashed:</label>
@@ -87,6 +87,7 @@ export default {
     form: {
       handler: throttle(function() {
         let query = pickBy(this.form)
+        console.log(query);
         this.$inertia.replace(this.route('organizations', Object.keys(query).length ? query : { remember: 'forget' }))
       }, 150),
       deep: true,
