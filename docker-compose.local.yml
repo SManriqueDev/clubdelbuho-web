@@ -1,0 +1,105 @@
+version: "3"
+
+networks:
+  laravel:
+
+volumes:
+  mundolector_db:
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - 80:80
+    container_name: mundolector_nginx
+    volumes:
+      - ./:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - laravel
+
+  mysql:
+    image: mysql:8
+    container_name: mundolector_mysql
+    volumes:
+      - mundolector_db:/var/lib/mysql
+    ports:
+      - 3306
+    environment:
+      MYSQL_DATABASE: mundolector
+      TZ: America/Bogota
+      MYSQL_USER: mundolector
+      MYSQL_PASSWORD: mundolector
+      MYSQL_ROOT_PASSWORD: mundolector
+      SERVICE_NAME: mysql
+    networks:
+      - laravel
+
+  php:
+    build: .
+    container_name: mundolector_php
+    environment:
+      TZ: America/Bogota
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - 9000
+    networks:
+      - laravel
+  
+  node:
+    image: node:alpine
+    container_name: mundolector_node
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - php
+    networks:
+      - laravel
+    command: sh ./init-scripts/node_start.sh
+    
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: mundolector_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: mundolector
+      TZ: America/Bogota
+    ports:
+      - "2222:80"
+    depends_on:
+      - mysql
+    networks:
+      - laravel
+
+  # Importante para usar docker-compose run --rm composer install (por ejemplo)
+  composer:
+    image: composer:latest
+    container_name: composer
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+    environment:
+      TZ: America/Bogota
+    depends_on:
+      - php
+    networks:
+      - laravel
+
+  # Importante para usar docker-compose run --rm artisan migrate (por ejemplo)
+  artisan:
+    build: .
+    container_name: artisan
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - mysql
+    working_dir: /var/www/html
+    entrypoint: ["php", "/var/www/html/artisan"]
+    networks:
+      - laravel
