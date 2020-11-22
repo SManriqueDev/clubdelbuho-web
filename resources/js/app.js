@@ -4,6 +4,14 @@ import PortalVue from 'portal-vue'
 import { InertiaApp } from '@inertiajs/inertia-vue'
 import { InertiaProgress } from '@inertiajs/progress/src'
 
+
+// Globally Registered Components
+import './globalComponents.js';
+
+// Feather font icon
+require('../css/iconfont.css');
+
+
 Vue.config.productionTip = false
 Vue.mixin({ methods: { route: window.route } })
 Vue.use(InertiaApp)
