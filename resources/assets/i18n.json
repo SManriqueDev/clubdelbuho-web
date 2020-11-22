@@ -4,13 +4,13 @@
         "en": "Email",
         "es": "Correo"
       },
-      "password ": {
+      "password": {
         "en": "Password",
         "es": "Contraseña"
       },
       "remember-me": {
         "en": "Remember me",
-        "es": "Recuerdame"
+        "es": "Recuérdame"
       },
       "forget-password": {
         "en": "Forget password",
@@ -23,6 +23,18 @@
       "welcome": {
         "en": "Welcome",
         "es": "Bienvenido"
+      }
+    },
+    "footer": {
+      "developed-by": {
+        "en": "Developed by",
+        "es": "Desarrollado por"
+      }
+    },
+    "actions": {
+      "access": {
+        "en": "Access",
+        "es": "Acceder"
       }
     }
   }

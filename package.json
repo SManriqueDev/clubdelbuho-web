@@ -29,6 +29,7 @@
         "tailwindcss": "^1.2.0-canary.5",
         "vue": "^2.6.11",
         "vue-feather-icons": "^5.1.0",
+        "vue-i18n": "^8.22.2",
         "vue-meta": "^2.3.1",
         "vue-template-compiler": "^2.6.11"
     }
