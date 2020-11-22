@@ -30,3 +30,9 @@ export default {
   },
 };
 </script>
+<style>
+.feather-icon {
+    display: inline-flex;
+    align-items: center;
+}
+</style>
