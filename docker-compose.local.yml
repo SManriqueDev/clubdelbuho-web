@@ -10,7 +10,7 @@ services:
   nginx:
     image: nginx:stable-alpine
     ports:
-      - 80:80
+      - 8000:80
     container_name: mundolector_nginx
     volumes:
       - ./:/var/www/html
@@ -49,18 +49,6 @@ services:
       - 9000
     networks:
       - laravel
-  
-  node:
-    image: node:alpine
-    container_name: mundolector_node
-    working_dir: /var/www/html
-    volumes:
-      - ./:/var/www/html
-    depends_on:
-      - php
-    networks:
-      - laravel
-    command: sh ./init-scripts/node_start.sh
     
 
   phpmyadmin:

@@ -19,6 +19,10 @@ const tailwindcss = require('tailwindcss')
 mix.js('resources/js/app.js', 'public/js')
   .postCss('resources/css/app.css', 'public/css/app.css')
   .options({
+    hmrOptions: {
+      host: 'localhost',  // site's host name
+      port: 8080,
+    },
     postCss: [
       cssImport(),
       cssNesting(),
@@ -40,10 +44,16 @@ mix.js('resources/js/app.js', 'public/js')
         '@': path.resolve('resources/js'),
       },
     },
+    // add any webpack dev server config here
     devServer: {
       proxy: {
         "*": "http://localhost:8000"
-      }
+      },
+      watchOptions: {
+        aggregateTimeout: 200,
+        poll: 5000
+      },
+
     }
   })
   .version()
