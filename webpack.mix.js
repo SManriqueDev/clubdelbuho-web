@@ -40,6 +40,13 @@ mix.js('resources/js/app.js', 'public/js')
         '@': path.resolve('resources/js'),
       },
     },
+    devServer: {
+      proxy: {
+        "*": "http://localhost:8000"
+      }
+    }
   })
   .version()
   .sourceMaps()
+
+
