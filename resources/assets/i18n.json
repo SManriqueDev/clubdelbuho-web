@@ -1,0 +1,28 @@
+{
+    "login": {
+      "email": {
+        "en": "Email",
+        "es": "Correo"
+      },
+      "password ": {
+        "en": "Password",
+        "es": "Contraseña"
+      },
+      "remember-me": {
+        "en": "Remember me",
+        "es": "Recuerdame"
+      },
+      "forget-password": {
+        "en": "Forget password",
+        "es": "Olvidaste tu contraseña"
+      },
+      "login": {
+        "en": "Login",
+        "es": "Iniciar sesión"
+      },
+      "welcome": {
+        "en": "Welcome",
+        "es": "Bienvenido"
+      }
+    }
+  }
