@@ -23,6 +23,14 @@ use Illuminate\Support\Facades\Route;
 
 // Auth
 
+Route::get('register', [LoginController::class, 'showRegisterForm'])
+    ->name('register')
+    ->middleware('guest');
+
+Route::post('register', [LoginController::class, 'register'])
+    ->name('register.submit')
+    ->middleware('guest');
+
 Route::get('login', [LoginController::class, 'showLoginForm'])
     ->name('login')
     ->middleware('guest');

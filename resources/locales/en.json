@@ -1,1 +1,25 @@
-{"entities":{"exercise":"Exercise"},"actions":{"access":"Access","filter":"Filter","create":"Create","search":"Search","reset":"Reset","previous":"Previous","next":"Next"},"footer":{"developed-by":"Developed by"},"exercises":{"name":"Name"},"login":{"email":"Email","password":"Password","remember-me":"Remember me","forget-password":"Forget password","login":"Login","welcome":"Welcome"}}
+{
+    "entities": { "exercise": "Exercise" },
+    "actions": {
+        "access": "Access",
+        "filter": "Filter",
+        "create": "Create",
+        "search": "Search",
+        "reset": "Reset",
+        "previous": "Previous",
+        "next": "Next"
+    },
+    "footer": { "developed-by": "Developed by" },
+    "exercises": { "name": "Name" },
+    "login": {
+        "email": "Email",
+        "password": "Password",
+        "remember-me": "Remember me",
+        "forget-password": "Forget password",
+        "login": "Login",
+        "welcome": "Welcome"
+    },
+    "register": {
+        "title": "Student Register"
+    }
+}
