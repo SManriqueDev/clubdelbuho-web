@@ -12,7 +12,7 @@
         <div
           class="rounded-lg border flex text-center items-center justify-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
         >
-          Selección multiple
+          Selección múltiple
         </div>
         <div
           class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
@@ -32,12 +32,27 @@
         <div
           class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
         >
-          Anagrama
+          Anagramas
         </div>
         <div
           class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
         >
           Selección multiple
+        </div>
+        <div
+          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
+        >
+          Sinónimos
+        </div>
+        <div
+          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
+        >
+          Relación columnas
+        </div>
+        <div
+          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
+        >
+          Completar con letras o palabras
         </div>
       </div>
     </t-modal>
