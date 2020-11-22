@@ -1,27 +1,30 @@
 <template>
-  <Transition name="fade">
-    <div
-      v-if="showing"
-      class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-800 z-50 mx-6"
-      @click.self="closeIfShown"
-    >
+  <div>
+    <Transition name="fade">
       <div
-        class="relative max-h-screen w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 flex"
+        v-if="showing"
+        class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-800 z-50 mx-6"
+        @click.self="closeIfShown"
       >
-        <button
-          v-if="showClose"
-          aria-label="close"
-          class="absolute top-0 right-0 text-xl text-gray-500 my-2 mx-4"
-          @click.prevent="close"
+        <div
+          class="relative max-h-screen w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 flex"
         >
-          ×
-        </button>
-        <div class="overflow-auto max-h-screen w-full">
-          <slot />
+          <button
+            v-if="showClose"
+            aria-label="close"
+            class="absolute top-0 right-0 text-xl text-gray-500 my-2 mx-4"
+            @click.prevent="close"
+          >
+            ×
+          </button>
+          <div class="overflow-auto max-h-screen w-full">
+            <slot />
+          </div>
         </div>
       </div>
-    </div>
-  </Transition>
+    </Transition>
+    <div v-if="showing" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+  </div>
 </template>
 
 <script>
