@@ -1,8 +1,52 @@
 <template>
   <div>
+    <t-modal
+      :showing="showModal"
+      @close="showModal = false"
+      :showClose="true"
+      :backgroundClose="true"
+    >
+      <div class="text-lg font-black mb-6">Seleccione un tipo de ejercicio</div>
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
+        <div
+          class="rounded-lg border flex text-center items-center justify-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
+        >
+          Selección multiple
+        </div>
+        <div
+          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
+        >
+          Crucigrama
+        </div>
+        <div
+          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
+        >
+          Verdadero/Falso
+        </div>
+        <div
+          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
+        >
+          Sopa de letras
+        </div>
+        <div
+          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
+        >
+          Anagrama
+        </div>
+        <div
+          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
+        >
+          Selección multiple
+        </div>
+      </div>
+    </t-modal>
     <h1 class="mb-8 font-bold text-3xl">Contactos</h1>
     <div class="mb-6 flex justify-between items-center">
-      <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
+      <search-filter
+        v-model="form.search"
+        class="w-full max-w-md mr-4"
+        @reset="reset"
+      >
         <label class="block text-gray-700">Trashed:</label>
         <select v-model="form.trashed" class="mt-1 w-full form-select">
           <option :value="null" />
@@ -23,32 +67,59 @@
           <th class="px-6 pt-6 pb-4">City</th>
           <th class="px-6 pt-6 pb-4" colspan="2">Phone</th>
         </tr>
-        <tr v-for="contact in contacts.data" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr
+          v-for="contact in contacts.data"
+          :key="contact.id"
+          class="hover:bg-gray-100 focus-within:bg-gray-100"
+        >
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
+            <inertia-link
+              class="px-6 py-4 flex items-center focus:text-indigo-500"
+              :href="route('contacts.edit', contact.id)"
+            >
               {{ contact.name }}
-              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+              <icon
+                v-if="contact.deleted_at"
+                name="trash"
+                class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2"
+              />
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+            <inertia-link
+              class="px-6 py-4 flex items-center"
+              :href="route('contacts.edit', contact.id)"
+              tabindex="-1"
+            >
               <div v-if="contact.organization">
                 {{ contact.organization.name }}
               </div>
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+            <inertia-link
+              class="px-6 py-4 flex items-center"
+              :href="route('contacts.edit', contact.id)"
+              tabindex="-1"
+            >
               {{ contact.city }}
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+            <inertia-link
+              class="px-6 py-4 flex items-center"
+              :href="route('contacts.edit', contact.id)"
+              tabindex="-1"
+            >
               {{ contact.phone }}
             </inertia-link>
           </td>
           <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+            <inertia-link
+              class="px-4 flex items-center"
+              :href="route('contacts.edit', contact.id)"
+              tabindex="-1"
+            >
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
             </inertia-link>
           </td>
@@ -63,16 +134,16 @@
 </template>
 
 <script>
-import Icon from '@/Shared/Icon'
-import Layout from '@/Shared/Layout'
-import mapValues from 'lodash/mapValues'
-import Pagination from '@/Shared/Pagination'
-import pickBy from 'lodash/pickBy'
-import SearchFilter from '@/Shared/SearchFilter'
-import throttle from 'lodash/throttle'
+import Icon from "@/Shared/Icon";
+import Layout from "@/Shared/Layout";
+import mapValues from "lodash/mapValues";
+import Pagination from "@/Shared/Pagination";
+import pickBy from "lodash/pickBy";
+import SearchFilter from "@/Shared/SearchFilter";
+import throttle from "lodash/throttle";
 
 export default {
-  metaInfo: { title: 'Contacts' },
+  metaInfo: { title: "Contacts" },
   layout: Layout,
   components: {
     Icon,
@@ -89,21 +160,27 @@ export default {
         search: this.filters.search,
         trashed: this.filters.trashed,
       },
-    }
+      showModal: true,
+    };
   },
   watch: {
     form: {
-      handler: throttle(function() {
-        let query = pickBy(this.form)
-        this.$inertia.replace(this.route('contacts', Object.keys(query).length ? query : { remember: 'forget' }))
+      handler: throttle(function () {
+        let query = pickBy(this.form);
+        this.$inertia.replace(
+          this.route(
+            "contacts",
+            Object.keys(query).length ? query : { remember: "forget" }
+          )
+        );
       }, 150),
       deep: true,
     },
   },
   methods: {
     reset() {
-      this.form = mapValues(this.form, () => null)
+      this.form = mapValues(this.form, () => null);
     },
   },
-}
+};
 </script>
