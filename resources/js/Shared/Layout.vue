@@ -15,6 +15,8 @@
               ></feather-icon>
               <div class="text-2xl text-white font-bold">Mundolector</div>
             </inertia-link>
+
+            <!-- Dropdown Menu -->
             <dropdown class="md:hidden" placement="bottom-end">
               <svg
                 class="fill-white w-6 h-6"
@@ -34,7 +36,21 @@
           <div
             class="bg-white border-b w-full p-4 md:py-3 md:px-12 text-sm md:text-md flex justify-between items-center"
           >
+            <!-- Locate Changer Select -->
+            <div class="locate-changer">
+              <select v-model="$i18n.locale">
+                <option
+                  v-for="(lang, i) in langs"
+                  :key="`Lang${i}`"
+                  :value="lang"
+                >
+                  {{ lang }}
+                </option>
+              </select>
+            </div>
+
             <div class="mt-1 mr-4">{{ $page.auth.user.account.name }}</div>
+
             <dropdown class="mt-1" placement="bottom-end">
               <div class="flex items-center cursor-pointer select-none group">
                 <div
@@ -111,6 +127,7 @@ export default {
     return {
       showUserMenu: false,
       accounts: null,
+      langs: ["en", "es"],
     };
   },
   methods: {

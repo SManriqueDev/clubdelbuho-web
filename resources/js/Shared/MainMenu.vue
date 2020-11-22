@@ -21,7 +21,7 @@
               : 'text-indigo-300 group-hover:text-white'
           "
         >
-          Ejercicios
+          {{ $t("entities.exercise") }}
         </div>
       </inertia-link>
     </div>

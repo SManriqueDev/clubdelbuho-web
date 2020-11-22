@@ -57,8 +57,8 @@
         </select>
       </search-filter>
       <button class="btn-indigo" @click="showModal = true">
-        <span>Create</span>
-        <span class="hidden md:inline">Exercise</span>
+        <span>{{ $t("actions.create") }}</span>
+        <span class="hidden md:inline">{{ $t("entities.exercise") }}</span>
       </button>
     </div>
 
@@ -67,7 +67,7 @@
       <table class="w-full whitespace-no-wrap">
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">ID</th>
-          <th class="px-6 pt-6 pb-4">Name</th>
+          <th class="px-6 pt-6 pb-4">{{ $t("exercises.name") }}</th>
         </tr>
         <tr
           v-for="exercise in exercises.data"
