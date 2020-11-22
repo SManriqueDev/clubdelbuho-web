@@ -1,45 +1,5 @@
 <template>
   <div>
-    <t-modal
-      :showing="showModal"
-      @close="showModal = false"
-      :showClose="true"
-      :backgroundClose="true"
-    >
-      <div class="text-lg font-black mb-6">Seleccione un tipo de ejercicio</div>
-      <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
-        <div
-          class="rounded-lg border flex text-center items-center justify-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
-        >
-          Selección multiple
-        </div>
-        <div
-          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
-        >
-          Crucigrama
-        </div>
-        <div
-          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
-        >
-          Verdadero/Falso
-        </div>
-        <div
-          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
-        >
-          Sopa de letras
-        </div>
-        <div
-          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
-        >
-          Anagrama
-        </div>
-        <div
-          class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
-        >
-          Selección multiple
-        </div>
-      </div>
-    </t-modal>
     <h1 class="mb-8 font-bold text-3xl">Contactos</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter

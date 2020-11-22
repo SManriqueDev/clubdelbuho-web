@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExercisesController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ReportsController;
@@ -138,6 +139,17 @@ Route::get('reports', [ReportsController::class, 'index'])
 // Images
 
 Route::get('/img/{path}', [ImagesController::class, 'show'])->where('path', '.*');
+
+Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function () {
+    // Exercises
+    Route::get('exercises', [ExercisesController::class, 'index'])
+    ->name('admin.exercises')
+    ->middleware('remember');
+
+    Route::get('exercises/{exercise}/edit', [ExercisesController::class, 'edit'])
+    ->name('admin.exercises.edit');
+
+});
 
 // 500 error
 

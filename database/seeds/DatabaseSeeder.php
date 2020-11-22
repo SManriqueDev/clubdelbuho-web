@@ -4,6 +4,7 @@ use App\Models\Account;
 use App\Models\Contact;
 use App\Models\Organization;
 use App\Models\User;
+use Database\Seeders\ExerciseSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -30,5 +31,9 @@ class DatabaseSeeder extends Seeder
             ->each(function ($contact) use ($organizations) {
                 $contact->update(['organization_id' => $organizations->random()->id]);
             });
+
+        $this->call([
+            ExerciseSeeder::class,
+        ]);
     }
 }
