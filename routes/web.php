@@ -145,7 +145,6 @@ Route::get('reports', [ReportsController::class, 'index'])
     ->middleware('auth');
 
 // Images
-
 Route::get('/img/{path}', [ImagesController::class, 'show'])->where('path', '.*');
 
 Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function () {
