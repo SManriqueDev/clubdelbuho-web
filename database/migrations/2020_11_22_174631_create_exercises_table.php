@@ -16,6 +16,8 @@ class CreateExercisesTable extends Migration
         Schema::create('exercises', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->enum('type', ['multiple_unique', 'multiple_multiple', 'true_false', 'relations', 'association', 'synonyms', 'anagrams', 'wordfind', 'crossword']);
+            $table->foreignId('knowledge_area_id');
             $table->timestamps();
             $table->softDeletes();
         });
