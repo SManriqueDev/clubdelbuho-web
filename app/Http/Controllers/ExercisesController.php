@@ -35,9 +35,12 @@ class ExercisesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($exercise_type)
     {
-        //
+
+        return Inertia::render('Admin/Exercises/' . ucwords($exercise_type) . '/Create.vue', [
+            'type' => 'Multiple'
+        ]);
     }
 
     /**

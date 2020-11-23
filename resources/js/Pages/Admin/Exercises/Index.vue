@@ -9,11 +9,12 @@
     >
       <div class="text-lg font-black mb-6">Seleccione un tipo de ejercicio</div>
       <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
-        <div
+        <inertia-link
+          :href="route('admin.exercises.create', 'multiple')"
           class="rounded-lg border flex text-center items-center justify-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
         >
           Selección múltiple
-        </div>
+        </inertia-link>
         <div
           class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
         >

@@ -29,6 +29,7 @@
 
 <script>
 export default {
+  name: "t-modal",
   props: {
     showing: {
       required: true,

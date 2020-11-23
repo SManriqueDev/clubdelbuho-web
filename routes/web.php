@@ -21,32 +21,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Auth
 
+
+Route::redirect('/', '/admin', 301);
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+    // Dashboards
+    Route::get('/', [DashboardController::class, 'index'])
+        ->name('admin.dashboard');
+    // Exercises
+    Route::get('exercises', [ExercisesController::class, 'index'])
+        ->name('admin.exercises')
+        ->middleware('remember');
+    Route::get('exercises/{exercise_type}/create', [ExercisesController::class, 'create'])
+        ->name('admin.exercises.create');
+    Route::get('exercises/{exercise}/edit', [ExercisesController::class, 'edit'])
+        ->name('admin.exercises.edit');
+});
+
+// Auth
 Route::get('register', [RegisterController::class, 'showRegisterForm'])
     ->name('register')
     ->middleware('guest');
-
 Route::post('register', [RegisterController::class, 'register'])
     ->name('register.submit')
     ->middleware('guest');
-
 Route::get('login', [LoginController::class, 'showLoginForm'])
     ->name('login')
     ->middleware('guest');
-
 Route::post('login', [LoginController::class, 'login'])
     ->name('login.attempt')
     ->middleware('guest');
-
 Route::post('logout', [LoginController::class, 'logout'])
     ->name('logout');
 
-// Dashboard
 
-Route::get('/', [DashboardController::class, 'index'])
-    ->name('dashboard')
-    ->middleware('auth');
 
 // Users
 
@@ -139,7 +147,6 @@ Route::put('contacts/{contact}/restore', [ContactsController::class, 'restore'])
     ->middleware('auth');
 
 // Reports
-
 Route::get('reports', [ReportsController::class, 'index'])
     ->name('reports')
     ->middleware('auth');
@@ -147,19 +154,10 @@ Route::get('reports', [ReportsController::class, 'index'])
 // Images
 Route::get('/img/{path}', [ImagesController::class, 'show'])->where('path', '.*');
 
-Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function () {
-    // Exercises
-    Route::get('exercises', [ExercisesController::class, 'index'])
-    ->name('admin.exercises')
-    ->middleware('remember');
 
-    Route::get('exercises/{exercise}/edit', [ExercisesController::class, 'edit'])
-    ->name('admin.exercises.edit');
 
-});
 
 // 500 error
-
 Route::get('500', function () {
     // Force debug mode for this endpoint in the demo environment
     if (App::environment('demo')) {

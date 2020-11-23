@@ -30,4 +30,8 @@ class Exercise extends Model
             }
         });
     }
+
+    public function getTypes(){
+        return $this->types;
+    }
 }
