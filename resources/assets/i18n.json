@@ -1,76 +1,86 @@
 {
     "entities": {
-      "exercise": {
-        "en": "Exercise",
-        "es": "Ejercicio"
-      }
+        "exercise": {
+            "en": "Exercise",
+            "es": "Ejercicio"
+        },
+        "exercises": {
+            "en": "Exercises",
+            "es": "Ejercicios"
+        }
+    },
+    "register": {
+        "title": {
+            "en": "Student Register",
+            "es": "Registro de estudiantes"
+        }
     },
     "actions": {
-      "access": {
-        "en": "Access",
-        "es": "Acceder"
-      },
-      "filter": {
-        "en": "Filter",
-        "es": "Filtrar"
-      },
-      "create": {
-        "en": "Create",
-        "es": "Crear"
-      },
-      "search": {
-        "en": "Search",
-        "es": "Buscar"
-      },
-      "reset": {
-        "en": "Reset",
-        "es": "Reiniciar"
-      },
-      "previous": {
-        "en": "Previous",
-        "es": "Anterior"
-      },
-      "next": {
-        "en": "Next",
-        "es": "Siguiente"
-      }
+        "access": {
+            "en": "Access",
+            "es": "Acceder"
+        },
+        "filter": {
+            "en": "Filter",
+            "es": "Filtrar"
+        },
+        "create": {
+            "en": "Create",
+            "es": "Crear"
+        },
+        "search": {
+            "en": "Search",
+            "es": "Buscar"
+        },
+        "reset": {
+            "en": "Reset",
+            "es": "Reiniciar"
+        },
+        "previous": {
+            "en": "Previous",
+            "es": "Anterior"
+        },
+        "next": {
+            "en": "Next",
+            "es": "Siguiente"
+        }
     },
     "footer": {
-      "developed-by": {
-        "en": "Developed by",
-        "es": "Desarrollado por"
-      }
+        "developed-by": {
+            "en": "Developed by",
+            "es": "Desarrollado por"
+        }
     },
     "exercises": {
-      "name": {
-        "en": "Name",
-        "es": "Nombre"
-      }
+        "name": {
+            "en": "Name",
+            "es": "Nombre"
+        }
     },
     "login": {
-      "email": {
-        "en": "Email",
-        "es": "Correo"
-      },
-      "password": {
-        "en": "Password",
-        "es": "Contraseña"
-      },
-      "remember-me": {
-        "en": "Remember me",
-        "es": "Recuérdame"
-      },
-      "forget-password": {
-        "en": "Forget password",
-        "es": "Olvidaste tu contraseña"
-      },
-      "login": {
-        "en": "Login",
-        "es": "Iniciar sesión"
-      },
-      "welcome": {
-        "en": "Welcome",
-        "es": "Bienvenido"
-      }
+        "email": {
+            "en": "Email",
+            "es": "Correo"
+        },
+        "password": {
+            "en": "Password",
+            "es": "Contraseña"
+        },
+        "remember-me": {
+            "en": "Remember me",
+            "es": "Recuérdame"
+        },
+        "forget-password": {
+            "en": "Forget password",
+            "es": "Olvidaste tu contraseña"
+        },
+        "login": {
+            "en": "Login",
+            "es": "Iniciar sesión"
+        },
+        "welcome": {
+            "en": "Welcome",
+            "es": "Bienvenido"
+        }
     }
-  }
+}
