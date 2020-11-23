@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExercisesController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
-use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,11 +23,11 @@ use Illuminate\Support\Facades\Route;
 
 // Auth
 
-Route::get('register', [LoginController::class, 'showRegisterForm'])
+Route::get('register', [RegisterController::class, 'showRegisterForm'])
     ->name('register')
     ->middleware('guest');
 
-Route::post('register', [LoginController::class, 'register'])
+Route::post('register', [RegisterController::class, 'register'])
     ->name('register.submit')
     ->middleware('guest');
 
