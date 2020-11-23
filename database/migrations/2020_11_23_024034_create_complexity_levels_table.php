@@ -4,20 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSchoolsTable extends Migration
+class CreateComplexityLevelsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('schools', function (Blueprint $table) {
+        Schema::create('complexity_levels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('country_id')->constrained('countries');
-            $table->foreignId('city_id')->constrained('cities');
+            $table->integer('points');
             $table->timestamps();
         });
     }
@@ -27,8 +26,8 @@ class CreateSchoolsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('schools');
+        Schema::dropIfExists('complexity_levels');
     }
 }
