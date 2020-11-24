@@ -22,7 +22,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+/* Student */
+Route::group(['prefix' => 'student'], function () {
+    Route::get('/', [StudentController::class, 'index']);
+});
 
+
+/* Admin */
 Route::redirect('/', '/admin', 301);
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     // Dashboards
