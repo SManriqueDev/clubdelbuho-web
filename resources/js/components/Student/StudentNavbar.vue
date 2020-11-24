@@ -10,7 +10,7 @@
           ></feather-icon>
           <div class="text-2xl text-white font-bold">Mundolector</div>
         </inertia-link>
-        <div class="flex flex-row justify-between">
+        <div class="hidden md:flex flex-row justify-between">
           <a class="mr-2 inline-block px-4 py-3 text-base text-white" href="#"
             >Mi progreso</a
           >
@@ -69,15 +69,15 @@
               fill="#4d4e59"
             />
           </svg>
-          <a
-            class="mr-2 inline-block px-4 py-3 text-base text-white"
-            href="#"
-          >
+          <a class="mr-2 inline-block px-4 py-3 text-base text-white" href="#">
             Mi Perfil</a
           >
-        <a class="inline-block px-2 py-2 cursor-pointer" href="#">
-            <icon name="exit" class="flex-shrink-0 w-6 h-6 fill-yellow-400 mr-2"/>
-        </a>
+          <a class="inline-block px-2 py-2 cursor-pointer" href="#">
+            <icon
+              name="exit"
+              class="flex-shrink-0 w-6 h-6 fill-yellow-400 mr-2"
+            />
+          </a>
         </div>
       </nav>
     </div>
