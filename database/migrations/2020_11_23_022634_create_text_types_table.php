@@ -16,7 +16,7 @@ class CreateTextTypesTable extends Migration
         Schema::create('text_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('group', []);
+            $table->enum('group', ['DEFAULT']);
             $table->timestamps();
         });
     }

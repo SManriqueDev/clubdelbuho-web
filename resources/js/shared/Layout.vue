@@ -49,16 +49,16 @@
               </select>
             </div>
 
-            <div class="mt-1 mr-4">{{ $page.auth.user.account.name }}</div>
+            <div class="mt-1 mr-4">Alen Software </div>
 
             <dropdown class="mt-1" placement="bottom-end">
               <div class="flex items-center cursor-pointer select-none group">
                 <div
                   class="text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-no-wrap"
                 >
-                  <span>{{ $page.auth.user.first_name }}</span>
+                  <span>{{ $page.auth.user.name }}</span>
                   <span class="hidden md:inline">{{
-                    $page.auth.user.last_name
+                    $page.auth.user.name
                   }}</span>
                 </div>
                 <icon

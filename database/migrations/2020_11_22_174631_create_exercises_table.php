@@ -23,6 +23,7 @@ class CreateExercisesTable extends Migration
             $table->foreignId('complexity_level_id');
             $table->foreignId('school_id');
             $table->text('content');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
