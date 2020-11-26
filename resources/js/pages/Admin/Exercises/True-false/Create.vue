@@ -6,14 +6,16 @@
                     <inertia-link
                         class="text-indigo-400 hover:text-indigo-600"
                         :href="route('admin.exercises')"
-                    >{{ $t("entities.exercises") }}</inertia-link
+                        >{{ $t("entities.exercises") }}</inertia-link
                     >
-                    <span class="text-indigo-400 font-medium">/</span> Nuevo Ejercicio
-                    Selección Múltiple
+                    <span class="text-indigo-400 font-medium">/</span> Nuevo
+                    Ejercicio Verdadero - Falso
                 </h1>
             </div>
             <div class="flex-shrink">
-                <button class="btn-indigo" @click="submit">Guardar Ejercicio</button>
+                <button class="btn-indigo" @click="submit">
+                    Guardar Ejercicio
+                </button>
             </div>
         </div>
 
@@ -30,28 +32,11 @@
                 v-model="exercise.content"
                 class="mb-6"
             />
-            <div class="mb-6 text-xl font-bold">Respuestas</div>
-            <div
-                class="flex flex-row m-5"
-                :key="index"
-                v-for="(answer, index) in exercise.answers"
-            >
-                <div class="flex flex-col items-center align-center mr-6">
-                    <div>
-                        Correcta?
-                    </div>
-                    <div class="flex justify-center p-5">
-                        <input style="transform: scale(1.3)" type="checkbox" />
-                    </div>
-                </div>
-                <text-input
-                    label="Respuesta"
-                    placeholder="Respuesta"
-                    v-model="answer.answer"
-                    class="w-full"
-                />
-            </div>
-            <button class="btn-indigo" @click="addAnswer">Agregar Respuesta</button>
+            <div class="mb-6 text-xl font-bold">Seleccione una respuesta correcta</div>
+            <select v-model="exercise.answer">
+                <option :value="true">Verdadero</option>
+                <option :value="false">Falso</option>
+            </select>
         </div>
     </div>
 </template>
@@ -74,20 +59,19 @@ export default {
         exercise: {
             question: "",
             content: "",
-            answers: [
-                {
-                    satisfactory: false,
-                    answer: ""
-                }
-            ]
+            answers: true
         }
     }),
     methods: {
         submit() {
-            this.$inertia.post(this.route("admin.exercises.store"), this.exercise, {
-                onStart: () => (this.sending = true),
-                onFinish: () => (this.sending = false)
-            });
+            this.$inertia.post(
+                this.route("admin.exercises.store"),
+                this.exercise,
+                {
+                    onStart: () => (this.sending = true),
+                    onFinish: () => (this.sending = false)
+                }
+            );
         },
         addAnswer() {
             this.exercise.answers.push({

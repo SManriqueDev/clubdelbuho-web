@@ -5,17 +5,10 @@ module.exports = {
         node: true
     },
     parserOptions: {
-        parser: 'babel-eslint'
+        parser: "babel-eslint"
     },
-    extends: [
-        'prettier',
-        'prettier/vue',
-        'plugin:prettier/recommended',
-    ],
-    plugins: [
-        'prettier'
-    ],
+    extends: ["prettier", "prettier/vue", "plugin:prettier/recommended"],
+    plugins: ["prettier"],
     // add your custom rules here
-    rules: {
-    }
-}
+    rules: {}
+};

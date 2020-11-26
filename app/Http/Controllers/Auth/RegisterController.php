@@ -42,7 +42,6 @@ class RegisterController extends Controller
 
     public function register()
     {
-
         $request = Request::validate([
             'email' => ['required', 'max:50', 'email'],
             'password' => ['required', 'min:6'],
@@ -72,6 +71,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'school_id' => $data['school_id'],
             'password' => Hash::make($data['password']),
         ]);
     }

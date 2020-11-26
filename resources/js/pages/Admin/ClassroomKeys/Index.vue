@@ -1,64 +1,52 @@
 <template>
     <div>
-        <!-- Exercises Type Modal -->
         <t-modal
             :showing="showModal"
             @close="showModal = false"
             :showClose="true"
             :backgroundClose="true"
         >
-            <div class="text-lg font-black mb-6">
-                Seleccione un tipo de ejercicio
-            </div>
-            <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
-                <inertia-link
-                    :href="route('admin.exercises.create', 'multiple')"
-                    class="rounded-lg border flex text-center items-center justify-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
+            <select-input
+                v-model="newKey.classroom_id"
+                class="pr-6 pb-8 w-full"
+                label="Aula"
+            >
+                <option :value="null" />
+                <option
+                    v-for="(classroom, i) in classrooms"
+                    :key="i"
+                    :value="classroom.id"
+                    >{{ classroom.name }}</option
                 >
-                    Selección múltiple
-                </inertia-link>
-                <div
-                    class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
+            </select-input>
+            <select-input
+                v-model="newKey.classroom_id"
+                class="pr-6 pb-8 w-full"
+                label="Rol"
+            >
+                <option :value="null" />
+                <option
+                    v-for="(classroom, i) in classrooms"
+                    :key="i"
+                    :value="classroom.id"
+                >{{ classroom.name }}</option
                 >
-                    Crucigrama
-                </div>
-                <inertia-link
-                    :href="route('admin.exercises.create', 'true-false')"
-                    class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
+            </select-input>
+            <text-input
+                v-model="newKey.classroom_id"
+                class="pr-6 pb-8 w-full"
+                type="number"
+                label="Cantidad"
+            >
+                <option :value="null" />
+                <option
+                    v-for="(classroom, i) in classrooms"
+                    :key="i"
+                    :value="classroom.id"
+                >{{ classroom.name }}</option
                 >
-                    Verdadero/Falso
-                </inertia-link>
-                <div
-                    class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
-                >
-                    Sopa de letras
-                </div>
-                <div
-                    class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
-                >
-                    Anagramas
-                </div>
-                <div
-                    class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
-                >
-                    Selección multiple
-                </div>
-                <div
-                    class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
-                >
-                    Sinónimos
-                </div>
-                <div
-                    class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
-                >
-                    Relación columnas
-                </div>
-                <div
-                    class="rounded-lg border flex items-center justify-center text-center w-full h-32 font-bold border-gray-400 cursor-pointer hover:bg-gray-300"
-                >
-                    Completar con letras o palabras
-                </div>
-            </div>
+            </text-input>
+            <button class="btn-indigo" @click="generateKeys">Generar Claves</button>
         </t-modal>
 
         <!-- Toolbar -->
@@ -68,18 +56,15 @@
                 class="w-full max-w-md mr-4"
                 @reset="reset"
             >
-                <label class="block text-gray-700">Trashed:</label>
+                <label class="block text-gray-700">Eliminados:</label>
                 <select v-model="form.trashed" class="mt-1 w-full form-select">
                     <option :value="null" />
-                    <option value="with">With Trashed</option>
-                    <option value="only">Only Trashed</option>
+                    <option value="with">Con eliminados</option>
+                    <option value="only">Solo Eliminados</option>
                 </select>
             </search-filter>
             <button class="btn-indigo" @click="showModal = true">
-                <span>{{ $t("actions.create") }}</span>
-                <span class="hidden md:inline">{{
-                    $t("entities.exercise")
-                }}</span>
+                Crear Código de Aula
             </button>
         </div>
 
@@ -88,22 +73,26 @@
             <table class="w-full whitespace-no-wrap">
                 <tr class="text-left font-bold">
                     <th class="px-6 pt-6 pb-4">ID</th>
-                    <th class="px-6 pt-6 pb-4">{{ $t("exercises.name") }}</th>
+                    <th class="px-6 pt-6 pb-4">Código</th>
+                    <th class="px-6 pt-6 pb-4">Aula</th>
+                    <th class="px-6 pt-6 pb-4">Rol</th>
                 </tr>
                 <tr
-                    v-for="exercise in exercises.data"
-                    :key="exercise.id"
+                    v-for="classroomkey in classroomkeys.data"
+                    :key="classroomkey.id"
                     class="hover:bg-gray-100 focus-within:bg-gray-100"
                 >
                     <td class="border-t">
                         <inertia-link
                             class="px-6 py-4 flex items-center focus:text-indigo-500"
-                            :href="route('admin.exercises.edit', exercise.id)"
+                            :href="
+                                route('admin.exercises.edit', classroomkey.id)
+                            "
                         >
                             {{ exercise.id }}
                             <icon
                                 name="trash"
-                                v-if="exercise.deleted_at"
+                                v-if="classroomkey.deleted_at"
                                 class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2"
                             />
                         </inertia-link>
@@ -111,7 +100,9 @@
                     <td class="border-t">
                         <inertia-link
                             class="px-6 py-4 flex items-center focus:text-indigo-500"
-                            :href="route('admin.exercises.edit', exercise.id)"
+                            :href="
+                                route('admin.exercises.edit', classroomkey.id)
+                            "
                         >
                             {{ exercise.name }}
                         </inertia-link>
@@ -120,7 +111,9 @@
                     <td class="border-t w-px">
                         <inertia-link
                             class="px-4 flex items-center"
-                            :href="route('admin.exercises.edit', exercise.id)"
+                            :href="
+                                route('admin.exercises.edit', classroomkey.id)
+                            "
                             tabindex="-1"
                         >
                             <icon
@@ -130,14 +123,14 @@
                         </inertia-link>
                     </td>
                 </tr>
-                <tr v-if="exercises.data.length === 0">
+                <tr v-if="classroomkeys.data.length === 0">
                     <td class="border-t px-6 py-4" colspan="4">
-                        No hay ejercicios.
+                        No hay códigos de aula.
                     </td>
                 </tr>
             </table>
         </div>
-        <pagination :links="exercises.links" />
+        <pagination :links="classroomkeys.links" />
     </div>
 </template>
 
@@ -160,6 +153,9 @@ export default {
     data() {
         return {
             showModal: false,
+            newKey: {
+                classroom_id: null,
+            },
             form: {
                 search: this.filters.search,
                 trashed: this.filters.trashed
@@ -183,12 +179,16 @@ export default {
         }
     },
     methods: {
+        generateKeys() {
+            alert('generando')
+        },
         reset() {
             this.form = mapValues(this.form, () => null);
         }
     },
     props: {
-        exercises: Object,
+        classroomkeys: Object,
+        classrooms: Array,
         filters: Object
     }
 };

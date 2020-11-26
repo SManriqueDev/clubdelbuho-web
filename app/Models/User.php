@@ -16,13 +16,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use SoftDeletes, Authenticatable, Authorizable;
 
+    protected $fillable = ['name', 'email', 'school_id', 'password'];
+
     protected $casts = [
         'owner' => 'boolean',
     ];
-
-    public function account()
+    public function school()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(School::class);
     }
 
     public function getNameAttribute()

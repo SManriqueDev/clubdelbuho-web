@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\ClassroomKey;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Classroom;
+use App\Models\ClassroomKey;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
+use Spatie\Permission\Models\Role;
 
 class ClassroomKeyController extends Controller
 {
@@ -16,4 +18,24 @@ class ClassroomKeyController extends Controller
         $key->save();
         return response(['status' => 'OK', 'message' => 'Código de Aula generado correctamente'], 200);
     }
+
+    public function index()
+    {
+        return Inertia::render('Admin/ClassroomKeys/Index', [
+            'filters' => \Illuminate\Support\Facades\Request::all('search', 'trashed'),
+            'classroomkeys' => ClassroomKey::filter(Request::only('search', 'trashed'))
+                ->orderByName()
+                ->paginate()
+                ->transform(function ($exercise) {
+                    return [
+                        'id' => $exercise->id,
+                        'code' => $exercise->name,
+                        'deleted_at' => $exercise->deleted_at,
+                    ];
+                }),
+            'classrooms' => Classroom::all(),
+            'roles' => Role::all()
+        ]);
+    }
+
 }

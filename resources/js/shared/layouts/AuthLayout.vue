@@ -19,7 +19,10 @@
 <script>
 export default {
   name: "locale-changer",
-  data() {
+    mounted() {
+      this.$i18n.locale = 'es'
+    },
+    data() {
     return { langs: ["es", "en"] };
   },
 };

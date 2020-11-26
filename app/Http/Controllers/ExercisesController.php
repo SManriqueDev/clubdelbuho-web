@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classroom;
 use App\Models\Exercise;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class ExercisesController extends Controller
@@ -43,15 +47,17 @@ class ExercisesController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        Request::validate([
+            'name' => ['required'],
+        ]);
+
+        Classroom::create([
+            'name' => Request::get('first_name'),
+        ]);
+
+        return Redirect::route('admin.classrooms.index')->with('success', 'Aula creada correctamente');
     }
 
     /**

@@ -1,2 +1,2 @@
-sudo docker-compose -f docker-compose.local.yml down --remove-orphans
-sudo docker-compose -f docker-compose.local.yml up -d --build
+docker-compose -f docker-compose.local.yml down --remove-orphans
+docker-compose -f docker-compose.local.yml
