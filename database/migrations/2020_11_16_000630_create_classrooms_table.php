@@ -16,7 +16,7 @@ class CreateClassroomsTable extends Migration
         Schema::create('classrooms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('school_id')->constrained('schools');
+            $table->foreignId('school_id')->nullable();
             $table->timestamps();
         });
     }

@@ -65,7 +65,7 @@
                             class="px-6 py-4 flex items-center focus:text-indigo-500"
                             :href="route('admin.exercises.edit', classroom.id)"
                         >
-                            {{ exercise.name }}
+                            {{ classroom.name }}
                         </inertia-link>
                     </td>
 
@@ -139,10 +139,14 @@ export default {
     },
     methods: {
         storeClassroom() {
-            this.$inertia.post(this.route("admin.classrooms.store"), this.newClassroom, {
-                onStart: () => (this.sending = true),
-                onFinish: () => (this.sending = false)
-            });
+            this.$inertia.post(
+                this.route("admin.classrooms.store"),
+                this.newClassroom,
+                {
+                    onStart: () => (this.sending = true),
+                    onFinish: () => (this.sending = false)
+                }
+            );
         },
         reset() {
             this.form = mapValues(this.form, () => null);

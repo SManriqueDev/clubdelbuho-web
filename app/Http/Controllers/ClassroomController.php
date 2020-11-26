@@ -18,11 +18,11 @@ class ClassroomController extends Controller
             'classrooms' => Classroom::filter(Request::only('search', 'trashed'))
                 ->orderByName()
                 ->paginate()
-                ->transform(function ($exercise) {
+                ->transform(function ($classroom) {
                     return [
-                        'id' => $exercise->id,
-                        'name' => $exercise->name,
-                        'deleted_at' => $exercise->deleted_at,
+                        'id' => $classroom->id,
+                        'name' => $classroom->name,
+                        'deleted_at' => $classroom->deleted_at,
                     ];
                 }),
         ]);
