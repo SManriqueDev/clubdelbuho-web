@@ -32,7 +32,7 @@ Route::group(['prefix' => 'student'], function () {
 
 
 /* Admin */
-// Route::redirect('/', '/admin', 301);
+Route::redirect('/', '/admin', 301);
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     // Dashboards
