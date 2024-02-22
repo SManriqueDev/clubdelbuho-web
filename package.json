@@ -11,6 +11,10 @@
         "i18n:build": "node ./scripts/build-lang-files.js",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
+    "engines": {
+        "node": "14.17.0",
+        "npm": "6.14.13"
+    },
     "dependencies": {
         "@fullhuman/postcss-purgecss": "^1.3.0",
         "@inertiajs/inertia": "^0.3.1",
