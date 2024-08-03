@@ -1,25 +1,50 @@
+FROM php:7.4-fpm
 
-FROM php:7.4-fpm-alpine
+# Copy composer.lock and composer.json
+COPY composer.lock composer.json /var/www/html/
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
-ENV PHP_UID=1000
-ENV PHP_GID=1000
-
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN docker-php-ext-install pdo pdo_mysql
-RUN mkdir -p /var/www/html/storage/framework/{sessions,views,cache} \
-    && mkdir -p /var/www/html/bootstrap/cache \
-    && mkdir -p /var/www/html/storage/logs \
-    && addgroup -g ${PHP_UID} www \
-    && adduser -H -D -u ${PHP_GID} -G www www \
-    && chown -R www:www /var/www/html \
-    && chmod -R 775 /var/www/html/storage
-
+# Set working directory
 WORKDIR /var/www/html
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    zip \
+    jpegoptim optipng pngquant gifsicle \
+    vim \
+    unzip \
+    git \
+    curl \
+    libzip-dev
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install extensions
+RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
+RUN docker-php-ext-install gd
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Add user for laravel application
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
+
+# Copy existing application directory contents
+COPY . /var/www/html
+
+# Copy existing application directory permissions
+COPY --chown=www:www . /var/www/html
+
+# Change current user to www
 USER www
-RUN chown -R www:www /var/www/html
 
-COPY . .
-
-RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts --no-progress
-RUN composer dump-autoload --optimize
+# Expose port 9000 and start php-fpm server
+EXPOSE 9000
+CMD ["php-fpm"]
