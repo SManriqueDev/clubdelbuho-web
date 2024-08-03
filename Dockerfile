@@ -9,8 +9,9 @@ RUN docker-php-ext-install pdo pdo_mysql
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install Node.js 14.17.0 and npm 6.14.13
-RUN apk add --no-cache nodejs npm
+# setup node js source will be used later to install node js
+RUN curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+RUN ["sh",  "./nodesource_setup.sh"]
 
 # Copy application files
 COPY . .
@@ -22,4 +23,4 @@ RUN composer install
 RUN npm install
 
 # Build assets
-RUN npm run production
+RUN npm run prod
