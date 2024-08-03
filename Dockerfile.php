@@ -18,7 +18,6 @@ RUN mkdir -p /var/www/html/storage/framework/{sessions,views,cache} \
 WORKDIR /var/www/html
 USER www
 
-COPY ./composer.json ./composer.lock ./
 COPY . .
 
 RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts --no-progress
