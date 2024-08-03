@@ -47,7 +47,7 @@ services:
       TZ: America/Bogota
     volumes:
       - /var/www/html/vendor
-      - .:/var/www/html
+      - ./:/var/www/html
     depends_on:
       - node
     ports:
