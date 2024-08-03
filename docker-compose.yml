@@ -47,6 +47,8 @@ services:
       TZ: America/Bogota
     volumes:
       - ./:/var/www/html
+    depends_on:
+      - node
     ports:
       - 9000
     networks:
