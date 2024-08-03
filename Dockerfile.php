@@ -16,3 +16,5 @@ COPY . .
 RUN composer install
 
 RUN composer dump-autoload --optimize
+
+ENTRYPOINT ["php-fpm"]
