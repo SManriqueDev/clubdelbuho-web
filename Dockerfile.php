@@ -12,7 +12,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 
 COPY ./composer.json ./composer.lock ./
-COPY ./database ./
+COPY . .
 
 
 RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts --no-progress
