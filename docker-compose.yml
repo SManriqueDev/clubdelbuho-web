@@ -65,29 +65,3 @@ services:
     networks:
       - laravel
 
-  # Importante para usar docker-compose run --rm composer install (por ejemplo)
-  composer:
-    image: composer:latest
-    container_name: composer
-    volumes:
-      - ./:/var/www/html
-    working_dir: /var/www/html
-    environment:
-      TZ: America/Bogota
-    depends_on:
-      - php
-    networks:
-      - laravel
-
-  # Importante para usar docker-compose run --rm artisan migrate (por ejemplo)
-  artisan:
-    build: .
-    container_name: artisan
-    volumes:
-      - ./:/var/www/html
-    depends_on:
-      - mysql
-    working_dir: /var/www/html
-    entrypoint: ["php", "/var/www/html/artisan"]
-    networks:
-      - laravel
