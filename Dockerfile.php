@@ -17,5 +17,9 @@ RUN composer install
 
 RUN composer dump-autoload --optimize
 
-CMD php artisan serve --host=0.0.0.0 --port=8000
+
+# Expose port 9000 for the PHP-FPM server
 EXPOSE 8000
+
+# Run the application
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
