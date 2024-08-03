@@ -58,7 +58,7 @@ services:
       dockerfile: Dockerfile.node
     restart: always
     volumes:
-      -./:/var/www/html
+      - ./:/var/www/html
     networks:
       - laravel
 
