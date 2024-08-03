@@ -16,7 +16,6 @@ COPY ./composer.json ./composer.lock ./
 
 RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts --no-progress
 
-
 COPY . .
 
 RUN composer dump-autoload --optimize
