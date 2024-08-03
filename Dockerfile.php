@@ -21,4 +21,4 @@ COPY . .
 
 RUN composer dump-autoload --optimize
 
-RUN chown -R www-data:www-data /var/www/html
+COPY --chown=www-data:www-data . /var/www/html
