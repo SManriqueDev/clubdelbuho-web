@@ -22,3 +22,5 @@ COPY . .
 RUN composer dump-autoload --optimize
 
 COPY --chown=www-data:www-data . /var/www/html
+RUN chown -R www-data:www-data /var/www/html/storage && \
+    chmod -R 775 /var/www/html/storage
