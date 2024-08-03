@@ -39,7 +39,9 @@ services:
       - laravel
 
   php:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.php
     container_name: mundolector_php
     environment:
       TZ: America/Bogota
@@ -49,7 +51,16 @@ services:
       - 9000
     networks:
       - laravel
-    
+  
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    restart: always
+    volumes:
+      -./:/var/www/html
+    networks:
+      - laravel
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
