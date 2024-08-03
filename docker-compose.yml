@@ -46,7 +46,7 @@ services:
     environment:
       TZ: America/Bogota
     volumes:
-      - ./:/var/www/html
+      - .:/var/www/html
     depends_on:
       - node
     ports:
