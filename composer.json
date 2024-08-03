@@ -42,7 +42,7 @@
             "App\\": "app/"
         },
         "classmap": [
-            "database/seeders",
+            "database/seeds",
             "database/factories"
         ]
     },
