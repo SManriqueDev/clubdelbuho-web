@@ -21,9 +21,4 @@ COPY . .
 
 RUN composer dump-autoload --optimize
 
-RUN addgroup -g 1000 www-data && \
-    adduser -u 1000 -G www-data -s /bin/sh -D www-data
-
-COPY --chown=www-data:www-data . .
-
-USER www-data
+RUN chown -R $user:$user /var/www/html
