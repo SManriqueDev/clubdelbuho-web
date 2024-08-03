@@ -21,4 +21,3 @@ USER www
 COPY . .
 
 RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts --no-progress
-RUN composer dump-autoload --optimize
