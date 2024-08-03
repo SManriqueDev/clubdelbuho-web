@@ -20,3 +20,10 @@ RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts --no-p
 COPY . .
 
 RUN composer dump-autoload --optimize
+
+RUN addgroup -g 1000 www-data && \
+    adduser -u 1000 -G www-data -s /bin/sh -D www-data
+
+COPY --chown=www-data:www-data . .
+
+USER www-data
