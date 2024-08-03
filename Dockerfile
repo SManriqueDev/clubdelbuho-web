@@ -12,7 +12,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Install Node.js 14.17.0 and npm 6.14.13
 RUN apk add --no-cache curl 
 
-RUN curl -sL https://unofficial-builds.nodejs.org/download/release/v14.17.6/node-v14.17.6-linux-x64-musl.tar.gz | tar xz -C /usr/local --strip-components=
+RUN curl -sL https://unofficial-builds.nodejs.org/download/release/v14.17.6/node-v14.17.6-linux-x64-musl.tar.gz | tar xz -C /usr/local --strip-components=1
 
 # Copy application files
 COPY . .
