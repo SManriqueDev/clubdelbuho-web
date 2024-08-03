@@ -4,12 +4,12 @@ FROM php:7.4-fpm-alpine
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Copy composer.lock and composer.json
-COPY composer.lock composer.json /var/www/html
+COPY composer.lock composer.json /var/www/html/
 
 # Set working directory
 WORKDIR /var/www/html
 
-RUN docker-php-ext-install pdo_mysql  zip exif pcntl
+RUN docker-php-ext-install pdo pdo_mysql
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
