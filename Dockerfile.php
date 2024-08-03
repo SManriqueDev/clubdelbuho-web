@@ -6,11 +6,17 @@ WORKDIR /var/www/html
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Install Composer
+ENV ENV COMPOSER_ALLOW_SUPERUSER=1
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy existing application directory contents
+
+COPY ./composer.json ./composer.lock ./
+
+
+RUN composer install --no-interaction --no-dev --prefer-dist --no-scripts --no-progress
+
+
 COPY . .
 
-# Install Composer dependencies
-RUN composer install
+RUN composer dump-autoload --optimize
