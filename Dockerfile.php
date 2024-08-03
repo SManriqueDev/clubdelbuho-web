@@ -17,6 +17,7 @@ RUN mkdir -p /var/www/html/storage/framework/{sessions,views,cache} \
 
 WORKDIR /var/www/html
 USER www
+RUN chown -R $user:$user /var/www/html
 
 COPY . .
 
