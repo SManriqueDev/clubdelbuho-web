@@ -1,44 +1,20 @@
 
 FROM php:7.4-fpm-alpine
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
 
-# Copy composer.lock and composer.json
-COPY composer.lock composer.json /var/www/html/
+RUN mkdir -p /var/www/html
+
+RUN chown laravel:laravel /var/www/html
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Setup GD extension
-RUN apk add --no-cache \
-      freetype \
-      libjpeg-turbo \
-      libpng \
-      freetype-dev \
-      libjpeg-turbo-dev \
-      libpng-dev \
-    && docker-php-ext-configure gd \
-      --with-freetype=/usr/include/ \
-      # --with-png=/usr/include/ \ # No longer necessary as of 7.4; https://github.com/docker-library/php/pull/910#issuecomment-559383597
-      --with-jpeg=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-enable gd \
-    && apk del --no-cache \
-      freetype-dev \
-      libjpeg-turbo-dev \
-      libpng-dev \
-    && rm -rf /tmp/*
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN apk add libzip-dev
-
+COPY . .
 RUN docker-php-ext-install pdo pdo_mysql zip bcmath
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Copy existing application directory contents
-COPY . /var/www/html
-
-RUN chown -R www-data:www-data /var/www/html
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
