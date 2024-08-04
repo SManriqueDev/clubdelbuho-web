@@ -12,11 +12,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        User::firstOrCreate([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-        ]);
-
+        User::firstOrCreate(
+            ['email' => 'johndoe@example.com'],
+            factory(User::class)->make([
+                'name' => 'John Doe',
+            ])->toArray()
+        );
 
         $this->call([
             CountrySeeder::class,
