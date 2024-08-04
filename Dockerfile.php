@@ -13,7 +13,7 @@ WORKDIR /var/www/html
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 COPY . .
-RUN docker-php-ext-install pdo pdo_mysql zip bcmath
+RUN docker-php-ext-install pdo pdo_mysql
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
