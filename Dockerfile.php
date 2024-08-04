@@ -18,9 +18,6 @@ RUN docker-php-ext-install pdo pdo_mysql
 # Copy Composer from the official Composer image
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Add laravel user and group
-RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
-
 # Install Composer dependencies
 RUN composer install --no-interaction --no-dev --optimize-autoloader
 
