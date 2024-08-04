@@ -48,22 +48,20 @@ services:
     volumes:
       - /var/www/html
       - /var/www/html/vendor
-    depends_on:
-      - node
     ports:
       - 9000
     networks:
       - laravel
   
-  node:
-    build:
-      context: .
-      dockerfile: Dockerfile.node
-    restart: always
-    volumes:
-      - ./:/var/www/html
-    networks:
-      - laravel
+  # node:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.node
+  #   restart: always
+  #   volumes:
+  #     - ./:/var/www/html
+  #   networks:
+  #     - laravel
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
