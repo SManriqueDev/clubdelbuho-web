@@ -1,49 +1,32 @@
 FROM php:7.4-fpm-alpine
 
-ENV COMPOSER_ALLOW_SUPERUSER 1
+RUN apk update && apk add bash
+RUN set -ex \
+    && apk --no-cache add \
+    postgresql-dev
+RUN docker-php-ext-install pdo pdo_pgsql
 
 # Install Node.js and npm
-RUN apk add --update nodejs npm
+# RUN apk add --update nodejs npm
 
-COPY composer.json composer.lock ./
-COPY . .
-# Add laravel user and group
-RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
+# Install nodejs 14 from unofficial repo instead of
+# This will not work RUN apk add --no-cache nodejs npm
+RUN wget https://unofficial-builds.nodejs.org/download/release/v14.4.0/node-v14.4.0-linux-x64-musl.tar.xz -P /opt/
+RUN tar -xf /opt/node-v14.4.0-linux-x64-musl.tar.xz -C /opt/
+ENV PATH="$PATH:/opt/node-v14.4.0-linux-x64-musl/bin"
 
-# Create necessary directories and set permissions
-RUN mkdir -p /var/www/html \
-    && chown -R laravel:laravel /var/www/html
+RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
 
-# Set working directory
 WORKDIR /var/www/html
+COPY . .
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql
+RUN composer install --no-scripts
 
-# Copy Composer from the official Composer image
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Install Composer dependencies
-RUN composer install --no-interaction --no-dev --optimize-autoloader
-
-# Install Node dependencies
-COPY package.json ./
+# Install Node.js dependencies and build assets
 RUN npm install
 RUN npm run production
 
-# Copy application files
-COPY . .
 
-# Set permissions for application files
-RUN chown -R laravel:laravel /var/www/html
+RUN chown -R www-data:www-data /var/www/html
 
-# Copy and execute the permissions script
-COPY set_permissions.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/set_permissions.sh
-RUN /usr/local/bin/set_permissions.sh
-
-RUN php artisan key:generate
-
-# Expose port 9000 and start php-fpm server
-EXPOSE 9000
-CMD ["php-fpm"]
+CMD bash -c "composer install && npm install && npm run prod && php artisan key:generate && php-fpm"
