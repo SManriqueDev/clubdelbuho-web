@@ -27,7 +27,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --no-interaction --no-dev --optimize-autoloader
 
 # Install Node dependencies
-COPY package.json package-lock.json ./
+COPY package.json ./
 RUN npm install
 RUN npm run production
 
