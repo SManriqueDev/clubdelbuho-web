@@ -1,3 +1,26 @@
+FROM composer:1.10.19 AS composer
+
+# WORKDIR /var/www/html
+
+# COPY composer.* ./
+
+# # Installs all composer packages
+# RUN composer install --no-interaction --no-progress --no-suggest --no-scripts --no-dev --no-autoloader
+
+
+FROM node:14-alpine AS node_builder
+
+RUN mkdir -p /var/www/html
+WORKDIR /var/www/html
+
+COPY . ./
+
+# Installs all node packages
+RUN npm install 
+# Generating static into /var/www/html
+RUN npm run prod
+
+
 FROM php:7.4-fpm-alpine
 
 RUN apk update && apk add bash
@@ -15,18 +38,18 @@ RUN wget https://unofficial-builds.nodejs.org/download/release/v14.4.0/node-v14.
 RUN tar -xf /opt/node-v14.4.0-linux-x64-musl.tar.xz -C /opt/
 ENV PATH="$PATH:/opt/node-v14.4.0-linux-x64-musl/bin"
 
-RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
+# RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
-COPY . .
+COPY . ./
 
-RUN composer install --no-scripts
+RUN composer install --no-interaction --no-progress --no-suggest --no-scripts --no-dev --no-autoloader
 
-# Install Node.js dependencies and build assets
-RUN npm install
-RUN npm run production
+COPY --from=node_builder /var/www/html/public ./public/
+# COPY --from=composer /var/www/html/vendor /var/www/html/vendor
 
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod 775 -R /var/www/html/storage 
 
-RUN chown -R www-data:www-data /var/www/html
-
-CMD bash -c "composer install && npm install && npm run prod && php artisan key:generate && php-fpm"
+CMD bash -c "composer install && php artisan key:generate && php-fpm"
