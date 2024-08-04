@@ -43,12 +43,11 @@ services:
       context: .
       dockerfile: Dockerfile.php
     container_name: mundolector_php
-    user: 'www-data:www-data'
     environment:
       TZ: America/Bogota
     volumes:
-      - /var/www/html/vendor
       - ./:/var/www/html
+      - /var/www/html/vendor
     depends_on:
       - node
     ports:
