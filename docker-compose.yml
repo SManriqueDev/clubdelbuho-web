@@ -39,9 +39,9 @@ services:
       - laravel
 
   php:
-    build: 
+    build:
       context: .
-      dockerfile: Dockerfile.php
+      dockerfile: Dockerfile
     container_name: mundolector_php
     environment:
       TZ: America/Bogota
