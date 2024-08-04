@@ -16,6 +16,9 @@ RUN docker-php-ext-install pdo pdo_mysql
 # Copy Composer from the official Composer image
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Install Composer dependencies
+RUN composer install --no-interaction --no-dev --optimize-autoloader
+
 # Copy application files
 COPY . .
 
