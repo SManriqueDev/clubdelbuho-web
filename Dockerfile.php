@@ -3,14 +3,13 @@ FROM php:7.4-fpm-alpine
 
 RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
 
-RUN mkdir -p /var/www/html
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+RUN mkdir -p /var/www/html
 RUN chown laravel:laravel /var/www/html
 
 # Set working directory
 WORKDIR /var/www/html
-
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 COPY . .
 RUN docker-php-ext-install pdo pdo_mysql
