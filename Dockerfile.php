@@ -49,7 +49,6 @@ RUN composer install --no-interaction --no-progress --no-suggest --no-scripts --
 COPY --from=node_builder /var/www/html/public ./public/
 # COPY --from=composer /var/www/html/vendor /var/www/html/vendor
 
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod 775 -R /var/www/html/storage 
+RUN chown -R www-data:www-data /var/www/html
 
-CMD bash -c "composer install && php artisan key:generate && php-fpm"
+CMD bash -c "chmod 775 -R storage/ && composer install && php artisan key:generate && php-fpm"
