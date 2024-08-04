@@ -2,6 +2,9 @@ FROM php:7.4-fpm-alpine
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+# Install Node.js and npm
+RUN apk add --update nodejs npm
+
 COPY composer.json composer.lock ./
 COPY . .
 # Add laravel user and group
@@ -22,6 +25,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install Composer dependencies
 RUN composer install --no-interaction --no-dev --optimize-autoloader
+
+# Install Node dependencies
+COPY package.json package-lock.json ./
+RUN npm install
+RUN npm run production
 
 # Copy application files
 COPY . .
