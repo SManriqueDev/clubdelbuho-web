@@ -2,6 +2,7 @@ FROM php:7.4-fpm-alpine
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+COPY composer.json composer.lock ./
 # Add laravel user and group
 RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
 
