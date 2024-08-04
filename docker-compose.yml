@@ -1,12 +1,11 @@
 version: "3"
 
-networks:
-  laravel:
-
-
 volumes:
   mundolector_db:
 
+networks:
+  dokploy-network:
+    external: true
 
 services:
   nginx:
@@ -21,7 +20,7 @@ services:
       - php
       - mysql
     networks:
-      - laravel
+      - dokploy-network
 
   mysql:
     image: mysql:8
@@ -38,7 +37,7 @@ services:
       MYSQL_ROOT_PASSWORD: mundolector
       SERVICE_NAME: mysql
     networks:
-      - laravel
+      - dokploy-network
 
   php:
     build:
@@ -54,4 +53,4 @@ services:
     ports:
       - 9000
     networks:
-      - laravel
+      - dokploy-network
