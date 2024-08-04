@@ -11,3 +11,5 @@ RUN npm install
 
 # Build assets
 RUN npm run prod
+
+COPY . .

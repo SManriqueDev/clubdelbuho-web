@@ -1,4 +1,5 @@
 #!/bin/sh
 
-chmod -R 755 storage/
-chmod -R 755 bootstrap/
+chmod -R 777 storage/
+php artisan cache:clear
+RUN php artisan key:generate
