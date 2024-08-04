@@ -11,7 +11,7 @@ WORKDIR /var/www/html
 
 RUN docker-php-ext-install pdo pdo_mysql 
 
-COPY --chown=laravel:laravel . /var/www/html
+COPY . .
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
