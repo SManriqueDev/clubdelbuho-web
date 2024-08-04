@@ -29,7 +29,13 @@ COPY . .
 # Set permissions for application files
 RUN chown -R laravel:laravel /var/www/html
 
+# Copy and execute the permissions script
+COPY set_permissions.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/set_permissions.sh
+RUN /usr/local/bin/set_permissions.sh
+
 RUN php artisan key:generate
+RUN php artisan cache:clear
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
