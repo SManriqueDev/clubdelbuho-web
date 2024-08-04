@@ -26,7 +26,7 @@ RUN composer install --no-interaction --no-dev --optimize-autoloader
 
 # Install Node dependencies and build assets
 COPY package.json ./
-RUN npm ci --only=production
+RUN npm install
 RUN npm run production
 
 # Generate application key
