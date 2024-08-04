@@ -22,6 +22,9 @@ COPY . .
 # Set permissions for application files
 RUN chown -R laravel:laravel /var/www/html
 
+# Switch to laravel user
+USER laravel
+
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
