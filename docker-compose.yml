@@ -47,6 +47,8 @@ services:
     container_name: mundolector_php
     environment:
       TZ: America/Bogota
+    depends_on:
+      - mysql
     volumes:
       - .:/var/www/html
     ports:

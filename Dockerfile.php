@@ -27,7 +27,7 @@ RUN apk update && apk add bash
 RUN set -ex \
     && apk --no-cache add \
     postgresql-dev
-RUN docker-php-ext-install pdo pdo_pgsql
+RUN docker-php-ext-install pdo pdo_pgsql pdo_mysql
 
 # Install Node.js and npm
 # RUN apk add --update nodejs npm
@@ -55,6 +55,9 @@ CMD bash -c "composer install && \
     npm install && \
     npm run prod && \
     php artisan key:generate && \
+    php artisan config:cache && \
+    php artisan migrate && \
+    php artisan db:seed && \
     php artisan storage:link && \
     chmod 775 -R /var/www/html/storage/ && \
     chown -R www-data:www-data * && \
