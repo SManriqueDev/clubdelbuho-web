@@ -21,10 +21,27 @@ services:
     networks:
       - laravel
 
+  mysql:
+    image: mysql:8
+    container_name: mundolector_mysql
+    volumes:
+      - mundolector_db:/var/lib/mysql
+    ports:
+      - 3306
+    environment:
+      MYSQL_DATABASE: mundolector
+      TZ: America/Bogota
+      MYSQL_USER: mundolector
+      MYSQL_PASSWORD: mundolector
+      MYSQL_ROOT_PASSWORD: mundolector
+      SERVICE_NAME: mysql
+    networks:
+      - laravel
+
   php:
-    build:
+    build: 
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.php
     container_name: mundolector_php
     environment:
       TZ: America/Bogota
