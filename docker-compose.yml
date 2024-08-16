@@ -6,7 +6,7 @@ services:
   nginx:
     image: nginx:stable-alpine
     ports:
-      - 8000:80
+      - 5003:80
     container_name: mundolector_nginx
     volumes:
       - .:/var/www/html
