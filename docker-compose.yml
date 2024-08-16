@@ -1,12 +1,13 @@
 version: "3"
 networks:
+  clubdelbuho:
   dokploy-network:
     external: true
 services:
   nginx:
     image: nginx:stable-alpine
     ports:
-      - 5003:80
+      - 80
     container_name: mundolector_nginx
     volumes:
       - .:/var/www/html
@@ -15,6 +16,13 @@ services:
       - php
     networks:
       - dokploy-network
+      - clubdelbuho
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${HASH}.rule=Host(`${APP_HOST}`)
+      - traefik.http.routers.${HASH}.entrypoints=websecure
+      - traefik.http.routers.${HASH}.tls.certResolver=letsencrypt
+      - traefik.http.services.${HASH}.loadbalancer.server.port=80
 
   php:
     build:
@@ -30,4 +38,4 @@ services:
     ports:
       - 9000
     networks:
-      - dokploy-network
+      - clubdelbuho
