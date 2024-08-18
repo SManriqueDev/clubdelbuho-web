@@ -3,6 +3,7 @@ networks:
   clubdelbuho:
   dokploy-network:
     external: true
+    
 services:
   nginx:
     image: nginx:stable-alpine
@@ -39,4 +40,3 @@ services:
       - 9000
     networks:
       - clubdelbuho
-      - dokploy-network
