@@ -36,8 +36,6 @@ services:
       TZ: America/Bogota
     volumes:
       - .:/var/www/html
-    ports:
-      - 9000
     networks:
       - clubdelbuho
       - dokploy-network
