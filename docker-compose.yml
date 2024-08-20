@@ -36,6 +36,9 @@ services:
       TZ: America/Bogota
     volumes:
       - .:/var/www/html
+      # - ./php/php.ini:/etc/php7.4/fpm/php.ini
+      - ./php/php.ini:/usr/local/etc/php.ini
+      - ./php/www.conf:/etc/php7.4/fpm/pool.d/www.conf
     networks:
       - clubdelbuho
       - dokploy-network
