@@ -1,79 +1,111 @@
-# Mundolector
+# Club del Búho Web
 
-A demo application to illustrate how Inertia.js works.
+Aplicación web del Club del Búho, construida con Laravel, Inertia.js y Tailwind CSS. Este repositorio contiene la interfaz web, la configuración de desarrollo y los recursos necesarios para ejecutar el proyecto localmente.
 
-## Installation
+## Tecnologías
 
-Clone the repo locally:
+- Laravel
+- Inertia.js
+- PHP
+- JavaScript / Node.js
+- Tailwind CSS
+- Vite / Mix
+- Docker
+
+## Requisitos previos
+
+- PHP 8+
+- Composer
+- Node.js 16+ o superior
+- Yarn o npm
+- SQLite, MySQL o PostgreSQL
+
+## Instalación local
+
+Clona el repositorio:
 
 ```sh
-git clone 
-cd mundolector
+git clone https://github.com/SManriqueDev/clubdelbuho-web.git
+cd clubdelbuho-web
 ```
 
-Install PHP dependencies:
+Instala las dependencias de PHP:
 
 ```sh
 composer install
 ```
 
-Install NPM dependencies:
+Instala las dependencias de frontend:
 
 ```sh
 yarn install
 ```
 
-Build assets:
-
-```sh
-yarn run dev
-```
-
-Setup configuration:
+Copia el archivo de entorno:
 
 ```sh
 cp .env.example .env
 ```
 
-Generate application key:
+Genera la clave de la aplicación:
 
 ```sh
 php artisan key:generate
 ```
 
-Create an SQLite database. You can also use another database (MySQL, Postgres), simply update your configuration accordingly.
+Si usas SQLite, crea la base de datos:
 
 ```sh
 touch database/database.sqlite
 ```
 
-Run database migrations:
+Ejecuta las migraciones y seeders:
 
 ```sh
-php artisan migrate
+php artisan migrate --seed
 ```
 
-Run database seeder:
+Compila los assets:
 
 ```sh
-php artisan db:seed
+yarn dev
 ```
 
-Run the dev server (the output will give the address):
+Levanta el servidor de desarrollo:
 
 ```sh
 php artisan serve
 ```
 
-You're ready to go! Visit Mundolector in your browser, and login with:
+## Desarrollo con Docker
 
-- **Username:** johndoe@example.com
-- **Password:** secret
+El proyecto incluye configuración para trabajar con Docker. Revisa los archivos `docker-compose.yml`, `Dockerfile.php` y `Dockerfile.node` para adaptar el entorno a tus necesidades.
 
-## Running tests
+## Credenciales de ejemplo
 
-To run the Mundolector tests, run:
+Si el proyecto incluye datos de prueba, puedes revisar el seeder o el archivo de configuración correspondiente para obtener las credenciales disponibles.
 
+## Scripts útiles
+
+- `yarn dev` — compila los assets en modo desarrollo
+- `yarn watch` — recompila automáticamente al detectar cambios
+- `yarn prod` — genera build optimizada para producción
+- `php artisan test` — ejecuta la suite de pruebas
+
+## Pruebas
+
+```sh
+php artisan test
 ```
-phpunit
-```
+
+## Estructura general
+
+- `app/` — lógica de la aplicación
+- `resources/` — vistas, assets y componentes frontend
+- `routes/` — definición de rutas
+- `database/` — migraciones, seeders y base de datos
+- `public/` — archivos públicos
+
+## Licencia
+
+Este proyecto está publicado bajo la licencia MIT.
